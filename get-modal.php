@@ -90,6 +90,7 @@
           </select>
         </div>
 
-        <button class="submit" type="submit">Отправить</button>
+        <button class="modal-update" type="submit">Обновить</button>
+        <button class="modal-create" type="submit">Создать</button>
       </form>
     </div>
