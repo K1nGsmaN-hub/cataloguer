@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Каталогизатор</title>
+  <script src="scripts/authCheck.js"></script>
+</head>
+<body>
+  <div class="modal-bg disabled"></div>
+
+  <form class="filters">
+    <h3>Фильтры</h3>
+      <div class="inner">
+        <div class="header">Раздел</div>
+        <div class="header">Вид</div>
+        <div class="header">Тип</div>
+  
+      </div>
+  
+      <button type="submit">Применить</button>
+ 
+  </form>
+
+  <table>
+    <tr class="table-title">
+        <td>Наимеование</td>
+        <td>Автор</td>
+        <td>Категория</td>
+    </tr>
+  </table>
+
+  <button class="create">+</button>
+
+  <script src="scripts/userTypeCheck.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/modal.js"></script>
+  <script src="scripts/filter.js"></script>
+  <script src="scripts/table.js"></script>
+</body>
+</html>
