@@ -1,59 +1,59 @@
+const getModalData = async (id) => {
+  const res = await fetch(`/get-modal-data.php?id=${id}`)
+
+  if (!res.ok) {
+    throw new Error(res.status)
+  }
+
+  return res.json()
+}
+
+const sendModalData = async (id) => {
+  const data = {
+    id,
+    title: modalFields.modalTitle.value,
+    author: modalFields.modalAuthor.value,
+    descr: modalFields.modalDescr.textContent,
+    edu: modalFields.modalEDU.value,
+    category: modalFields.modalCategory.value,
+    section: modalFields.modalSection.value,
+    specialty: modalFields.modalSpecialty.value,
+    work_type: modalFields.modalWork.value,
+    file_type: modalFields.modalFile.value,
+    theme: modalFields.modalTheme.value
+  }
+
+  const res = await fetch('/update-by-id.php', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  if (!res.ok) {
+    throw new Error(res.status)
+  }
+
+  return res
+}
+
+const getModal = async () => {
+  const res = await fetch(`/get-modal.php`)
+
+  const {ok, status, statusText } = res;
+
+  if (!ok) {
+    throw {
+      status,
+      statusText
+    }
+  }
+
+  return res.text();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const getModal = async () => {
-    const res = await fetch(`/get-modal.php`)
-
-    const {ok, status, statusText } = res;
-
-    if (!ok) {
-      throw {
-        status,
-        statusText
-      }
-    }
-
-    return res.text();
-  }
-
-  const getModalData = async (id) => {
-    const res = await fetch(`/get-modal-data.php?id=${id}`)
-
-    if (!res.ok) {
-      throw new Error(res.status)
-    }
-
-    return res.json()
-  }
-
-  const sendModalData = async (id) => {
-    const data = {
-      id,
-      title: modalFields.modalTitle.value,
-      author: modalFields.modalAuthor.value,
-      descr: modalFields.modalDescr.textContent,
-      edu: modalFields.modalEDU.value,
-      category: modalFields.modalCategory.value,
-      section: modalFields.modalSection.value,
-      specialty: modalFields.modalSpecialty.value,
-      work_type: modalFields.modalWork.value,
-      file_type: modalFields.modalFile.value,
-      theme: modalFields.modalTheme.value
-    }
-
-    const res = await fetch('/update-by-id.php', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if (!res.ok) {
-      throw new Error(res.status)
-    }
-
-    return res
-  }
-
   getModal()
     .then((text) => {
       modalFields.modalBG = document.querySelector('.modal-bg'),
@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
       modalFields.btnSubmit.addEventListener('click', (e) => {
         e.preventDefault()
         sendModalData(modalFields.modalID.value)
-          .then((res) => console.log(res))
           .then(() => {
             updateTable()
               .then(text => {
