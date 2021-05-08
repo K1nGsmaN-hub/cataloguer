@@ -1,7 +1,7 @@
 <?php
   include("connect.php");
   
-  $resources = R::getAll('SELECT * FROM `resources`');
+  $resources = R::getAll('SELECT * FROM `resources` WHERE '.$_GET['filter']);
 
   foreach ($resources as $res) {
     echo "<tr data-id='".$res['id']."'>";
