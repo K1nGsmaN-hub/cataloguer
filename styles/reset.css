@@ -104,7 +104,6 @@ html,
     display: block;
   }
   body {
-    overflow: hidden;
     line-height: 1;
   }
   ol,
