@@ -4,7 +4,13 @@
   $codedData = trim(file_get_contents("php://input"));
   $data = json_decode($codedData, true);
 
-  $resource = R::load('resources', $data['id']);
+  if ($_GET['do'] === 'create') {
+    $resource = R::dispense('resources');
+  }
+
+  if ($_GET['do'] === 'update') {
+    $resource = R::load('resources', $data['id']);
+  }
 
   $resource->title = $data['title'];
   $resource->author = $data['author'];
