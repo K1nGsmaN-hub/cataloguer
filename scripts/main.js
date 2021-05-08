@@ -4,6 +4,7 @@ const table = document.querySelector('table'),
 const modalFields = {
   modalBG: null,
   btnClose: null,
+  btnCreate: null,
   btnSubmit: null,
   modalID: null,
   modalTitle: null,
