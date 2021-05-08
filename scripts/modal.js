@@ -1,3 +1,11 @@
+const cleanModalFields = () => {
+  modalFields.modalID.value = ''
+  modalFields.modalTitle.value = ''
+  modalFields.modalAuthor.value = ''
+  modalFields.modalDescr.value = ''
+  modalFields.modalEDU.value = ''
+}
+
 const getModalData = async (id) => {
   const res = await fetch(`/get-modal-data.php?id=${id}`)
 
@@ -8,7 +16,7 @@ const getModalData = async (id) => {
   return res.json()
 }
 
-const sendModalData = async (id) => {
+const sendModalData = async (id, query = 'update') => {
   const data = {
     id,
     title: modalFields.modalTitle.value,
@@ -23,7 +31,7 @@ const sendModalData = async (id) => {
     theme: modalFields.modalTheme.value
   }
 
-  const res = await fetch('/update-by-id.php', {
+  const res = await fetch(`/update-by-id.php?do=${query}`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -56,12 +64,13 @@ const getModal = async () => {
 document.addEventListener("DOMContentLoaded", () => {
   getModal()
     .then((text) => {
-      modalFields.modalBG = document.querySelector('.modal-bg'),
+      modalFields.modalBG = document.querySelector('.modal-bg')
       modalFields.modalBG.innerHTML = text
     })
     .then(() => {
-      modalFields.btnClose = document.querySelector('div.modal-window button.close'),
-      modalFields.btnSubmit = document.querySelector('button.submit')
+      modalFields.btnClose = document.querySelector('div.modal-window button.close')
+      modalFields.btnSubmit = document.querySelector('button.modal-update')
+      modalFields.btnCreate = document.querySelector('button.modal-create')
       modalFields.modalID = document.querySelector('#modal-id')
       modalFields.modalTitle = document.querySelector('#modal-title')
       modalFields.modalAuthor = document.querySelector('#modal-author')
@@ -87,10 +96,31 @@ document.addEventListener("DOMContentLoaded", () => {
           })
           modalFields.modalBG.classList.add('disabled')
       })
+
+      modalFields.btnCreate.addEventListener('click', (e) => {
+        e.preventDefault()
+        sendModalData(modalFields.modalID.value, 'create')
+          .then(() => {
+            updateTable()
+              .then(text => {
+                table.innerHTML = tableInner + text
+              })
+              .then(() => updateTRListeners())
+          })
+          modalFields.modalBG.classList.add('disabled')
+      })
     })
     .then(() => {
       modalFields.btnClose.addEventListener('click', () => {
         modalFields.modalBG.classList.add('disabled')
+        cleanModalFields()
+      })
+    })
+    .then(() => {
+      document.querySelector('.create').addEventListener('click', () => {
+        modalFields.btnSubmit.hidden = true
+        modalFields.btnCreate.hidden = false
+        modalFields.modalBG.classList.remove('disabled')
       })
     })
 })
