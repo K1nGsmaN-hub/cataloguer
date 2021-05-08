@@ -2,7 +2,3 @@
 @import "table.css";
 @import "modal.css";
 @import "filter.css";
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}

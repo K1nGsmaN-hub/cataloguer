@@ -1,0 +1,75 @@
+@import "reset.css";
+
+body {
+  width: 100%;
+  max-height: 100vh;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 25px 45px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+form h1 {
+  font-size: 26px;
+  line-height: 33px;
+  margin-bottom: 20px;
+}
+
+form #error {
+  opacity: 0;
+  color: red;
+  font-weight: 700;
+  margin-bottom: 10px;
+  transition: opacity 0.3 linear;
+}
+
+form #error.visible {
+  opacity: 1;
+}
+
+form input, form button {
+  width: 350px;
+  height: 40px;
+  padding: 15px;
+  
+  border: none;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 22px;
+
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+form input {
+  transition: box-shadow 0.2 linear;
+}
+
+form input.error {
+  box-shadow: 0 0 15px rgba(255,0,0,0.15);
+}
+
+form input:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+form button {
+  width: auto;
+  padding: 10px 25px;
+  background-color: #fff;
+}
