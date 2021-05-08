@@ -1,6 +1,9 @@
 const updateTRListeners = () => {
   document.querySelectorAll('tr').forEach(item => {
     item.addEventListener('click', async () => {
+      modalFields.btnSubmit.hidden = false
+      modalFields.btnCreate.hidden = true
+
       getModalData(item.dataset.id)
         .then(res => {
           modalFields.modalID.value = res.id
