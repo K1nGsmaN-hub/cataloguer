@@ -20,7 +20,7 @@ const updateTRListeners = () => {
   })
 }
 
-const updateTable = async (query = '') => {
+const updateTable = async (query = '?filter=1') => {
   const res = await fetch(`/update-table.php${query}`)
 
   const {ok, status, statusText } = res;
